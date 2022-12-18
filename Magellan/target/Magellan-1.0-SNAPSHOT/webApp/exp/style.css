@@ -1,4 +1,112 @@
-#root {
-    max-width: 1200px;
-    margin: 0 auto;
+body {
+    background-color: antiquewhite;
+    margin: 0;
+}
+
+.navbar {
+
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+}
+
+.navbar a {
+    float: right;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+
+}
+
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+    background-color: gray;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropbtn img {
+    height: 75px;
+    width: 75px;
+    padding-right: 200px;
+}
+
+.navleft {
+    float: left;
+    padding: 0;
+    margin: 0;
+    display: block;
+    position: absolute;
+}
+
+.navleft img {
+    padding: 14px 200px;
+    height: 75px;
+    width: 75px;
+    border-radius: 30%;
+}
+
+.text {
+    margin-top: 130px;
+}
+
+.container {
+    height: 200px;
+    position: relative;
+
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
