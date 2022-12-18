@@ -15,10 +15,12 @@ public class HelloResource {
         return Response.ok("teszt1").build();
     }
     @GET
-    @Path("teszt_get2")
+    @Path("int_back")
     @Produces(MediaType.APPLICATION_JSON)
+
     public Response hello2() {
-        return Response.ok("teszt2").build();
+        int szam = 5;
+        return Response.ok(szam).build();
     }
 
    @POST
