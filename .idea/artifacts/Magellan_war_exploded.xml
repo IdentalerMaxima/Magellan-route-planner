@@ -13,6 +13,12 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Magellan" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.json:json:20220924" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.15" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.19.0" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.19.0" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/Magellan/target/Magellan-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
