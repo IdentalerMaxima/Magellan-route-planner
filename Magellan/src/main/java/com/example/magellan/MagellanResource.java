@@ -18,11 +18,11 @@ public class MagellanResource {
     @GET
     @Path("getuserloginstatus/{username}")
     public Response getUserLoginStatus(@PathParam("username") String username){
-        User user = usersService.getUser(username);
+        User user = usersService.getUserFromDatabase(username);
         if(user == null){
             return Response.ok("User not found!").build();
         }
-        if(User.loggedInUsers.contains(user.getUsername())){
+        if(usersService.isUserLoggedIn(user)){
             return Response.ok("User logged in!").build();
         }else{
             return Response.ok("User not logged in!").build();
@@ -31,9 +31,13 @@ public class MagellanResource {
 
     @GET
     @Path("logout/{username}")
-    public Response logout(@PathParam("username") String username){
-        if(User.loggedInUsers.contains(username)){
-            User.loggedInUsers.remove(username);
+    public Response userLogout(@PathParam("username") String username){
+        User user = usersService.getUserFromDatabase(username);
+        if(user==null){
+            return Response.ok("user not found!").build();
+        }
+        if(usersService.isUserLoggedIn(user)){
+            User.loggedInUsers.remove(usersService.getLoggedInUserInstanceIndexInArray(user));
             return Response.ok("User logged out!").build();
         }else{
             return Response.ok("User was already logged out!").build();
@@ -43,31 +47,36 @@ public class MagellanResource {
     @POST
     @Path("login")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response loginUser(final LoginParameterBean loginInfo){
+    public Response userLogin(final LoginParameterBean loginInfo){
         logger.info("login called");
-        User tempUser = usersService.getUser(loginInfo.username);
-        if(tempUser==null){return Response.ok("User not found!").build();}
-        if(usersService.encryptPassword(loginInfo.password).equals(tempUser.getPassword())){
-            User.loggedInUsers.add(tempUser.getUsername());
-            return Response.ok("Successful login!").build();
+        User tempUser = usersService.getUserFromDatabase(loginInfo.username);
+        String responseText;
+
+        if(tempUser==null){
+            return Response.ok("User not found!").build();
         }
-        else{
-            return Response.ok("Incorrect password").build();
+
+        if(!usersService.encryptPassword(loginInfo.password).equals(tempUser.getPassword())){
+            responseText = "Incorrect password";
         }
+        else {
+            responseText = usersService.logUserIn(tempUser) ? "Login successful!" : "User already logged in!";
+        }
+        return Response.ok(responseText).build();
     }
 
     @POST
     @Path("register")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerUser(final RegisterParameterBean userInfo){
-        User tempUser = usersService.getUser(userInfo.username);
+        User tempUser = usersService.getUserFromDatabase(userInfo.username);
         if(tempUser!=null){
             return Response.ok("username is taken!").build();
         }
 
-        tempUser = new User(userInfo.username, userInfo.email, usersService.encryptPassword(userInfo.password));
-        tempUser = usersService.insertUserIntoDB(tempUser);
-        User.loggedInUsers.add(tempUser.getUsername());
+        tempUser = new User(userInfo.username, UserRole.User, userInfo.email, usersService.encryptPassword(userInfo.password));
+        tempUser = usersService.insertUserIntoDatabase(tempUser);
+        User.loggedInUsers.add(tempUser);
         return Response.ok("Successful registration!").build();
     }
 
