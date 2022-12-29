@@ -1,14 +1,12 @@
-package com.example.magellan;
+package com.magellan.user;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.core.Response;
 import org.apache.commons.codec.digest.DigestUtils;
 
 @ApplicationScoped
-@Transactional
 public class UsersService {
 
     public Boolean isUserLoggedIn(User user){
@@ -48,10 +46,12 @@ public class UsersService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     public User getUserFromDatabase(String username){
         return entityManager.find(User.class, username);
     }
 
+    @Transactional
     public User insertUserIntoDatabase(User user){
         entityManager.persist(user);
         return user;

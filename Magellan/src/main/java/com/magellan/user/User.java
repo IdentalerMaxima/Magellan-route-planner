@@ -1,4 +1,4 @@
-package com.example.magellan;
+package com.magellan.user;
 
 import jakarta.persistence.*;
 
@@ -12,9 +12,9 @@ public class User implements Serializable {
     @Id
     @Column(name = "username", nullable = false)
     private String username;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    private UserRole role;
+
+    @Column(name = "isAdmin", nullable = false)
+    private Boolean isAdmin;
     @Column(name = "email", nullable = false)
     private String email;
     @Column(name = "password", nullable = false)
@@ -25,11 +25,19 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String username, UserRole role, String email, String password) {
+    public User(String username, Boolean isAdmin, String email, String password) {
         this.username = username;
-        this.role = role;
+        this.isAdmin = isAdmin;
         this.email = email;
         this.password = password;
+    }
+
+    public Boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 
     public String getUsername() {
@@ -38,10 +46,6 @@ public class User implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public UserRole getRole() {
-        return role;
     }
 
     public String getEmail() {

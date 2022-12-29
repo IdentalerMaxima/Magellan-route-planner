@@ -1,34 +1,34 @@
-package com.example.magellan;
+package com.magellan.user;
 
+import com.magellan.LoginParameterBean;
+import com.magellan.MagellanResource;
+import com.magellan.RegisterParameterBean;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Path("magellan")
-public class MagellanResource {
-
+@Path("user")
+public class UserController {
     @Inject
     private UsersService usersService;
 
-    private static final Logger logger = LogManager.getLogger(MagellanResource.class);
-
+    private static final Logger logger = LogManager.getLogger(UserController.class);
     @GET
-    @Path("getuserloginstatus/{username}")
+    @Path("loginstatus/{username}")
     public Response getUserLoginStatus(@PathParam("username") String username){
         User user = usersService.getUserFromDatabase(username);
         if(user == null){
             return Response.ok("User not found!").build();
         }
         if(usersService.isUserLoggedIn(user)){
-            return Response.ok("User logged in!").build();
+            return Response.ok("User logged in and user is admin: "+user.isAdmin()+"!").build();
         }else{
             return Response.ok("User not logged in!").build();
         }
     }
-
     @GET
     @Path("logout/{username}")
     public Response userLogout(@PathParam("username") String username){
@@ -74,12 +74,9 @@ public class MagellanResource {
             return Response.ok("username is taken!").build();
         }
 
-        tempUser = new User(userInfo.username, UserRole.User, userInfo.email, usersService.encryptPassword(userInfo.password));
+        tempUser = new User(userInfo.username, false, userInfo.email, usersService.encryptPassword(userInfo.password));
         tempUser = usersService.insertUserIntoDatabase(tempUser);
         User.loggedInUsers.add(tempUser);
         return Response.ok("Successful registration!").build();
     }
-
-
 }
-
