@@ -1,5 +1,5 @@
 function getApi() {
-    var url = "http://127.0.0.1:8080/Magellan-1.0-SNAPSHOT/api/teszt_get";
+    var url = "http://127.0.0.1:8080/Magellan-1.0-SNAPSHOT/api/route/test";
 
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url);

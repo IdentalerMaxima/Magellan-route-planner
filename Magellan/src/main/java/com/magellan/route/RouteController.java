@@ -11,6 +11,7 @@ import java.util.List;
 @Path("route")
 public class RouteController {
 
+
     @Inject
     private RouteService routeService;
 
@@ -44,6 +45,13 @@ public class RouteController {
         JSONObject jsonRoute = new JSONObject(routeService.convertRouteToJsonString(route));
         return Response.ok(jsonRoute.toString()).build();
     }
+    @GET
+    @Path("test")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response testWrite(){
+        return Response.ok(("sikeres teszt").toString()).build();
+    }
+
 
     @GET
     @Path("{id}/comments")
