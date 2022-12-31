@@ -119,16 +119,14 @@ html {
 
 /*BANNER INDEX*/
 #indexBanner {
-    height: 50fr;
-    width: 50fr;
-
+    margin-top: 90px;
 }
 
 #indexBanner img {
-    height: 50fr;
-    width: 50fr;
+    height: 500px;
+    width: 1000px;
     display: block;
- 
+    margin: 0 auto;
 
 }
 

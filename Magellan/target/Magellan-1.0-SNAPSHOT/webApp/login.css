@@ -1,7 +1,7 @@
 /*LOGIN OLDAL */
 body {
     background: rgb(240,208,200);
-    background: radial-gradient(circle, rgba(240,208,200,1) 0%, rgba(179,217,183,1) 100%);
+    background: radial-gradient(circle, rgba(240,208,200,1) 0%, rgba(255,255,255,1) 24%, rgba(209,203,192,1) 76%, rgba(179,217,183,1) 100%);
 }
 
 form {
