@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,18 +12,18 @@
 </head>
 
 <body>
-    <form action="#">
+    <form method="post" action="#">
+    
         <div class="container">
             <h1>Regisztráció</h1>
             <p>Kérem a regisztrációhoz töltsön ki inden rublikát.</p>
             <hr>
-
+            <label for="username"><b>Felhasználónév</b></label>
+            <input type="text" placeholder="Üsse be a felhasználónevét" name="username" id="username" required>
             <label for="email"><b>E-mail</b></label>
             <input type="text" placeholder="Üsse be az e-mailt" name="email" id="email" required>
-
             <label for="psw"><b>Jelszó</b></label>
             <input type="password" placeholder="Üsse be jelszavát" name="psw" id="psw" required>
-
             <label for="psw-repeat"><b>Jelszó ismét</b></label>
             <input type="password" placeholder="Jelszó ismét" name="psw-repeat" id="psw-repeat" required>
             <hr>
