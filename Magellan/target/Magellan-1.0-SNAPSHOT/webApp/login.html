@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+
+        <div class="container">
+            <label for="uname"><b>Felhasználónév</b></label>
+            <input type="text" placeholder="Felhasználónév bevitel" name="uname" required>
+
+            <label for="psw"><b>Jelszó</b></label>
+            <input type="password" placeholder="Jelszó bevitel" name="psw" required>
+
+            <button id="loginButton" type="submit">Bejelentkezés</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Emlékezz rám
+            </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" class="cancelbtn">Kilépés</button>
+            <span class="psw">Elfelejtett <a href="#">jelszó?</a></span>
+        </div>
+    </form>
+    <div class="logoHolder">
+        <img src="exp/logo.jpg" alt="">
+    </div>
+</body>
+
+</html>
