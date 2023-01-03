@@ -1,5 +1,6 @@
 body {
-    background-color: antiquewhite;
+    background: #c8c8c8;
+
     margin: 0;
     margin-top: 80px;
     text-align: justify;
@@ -117,17 +118,18 @@ html {
 }
 
 /*BANNER INDEX*/
-#indexBanner {
-    margin-top: 90px;
+
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 70vh;
+    width: auto;
+    margin: 5%;
+    border-radius: 5%;
 }
 
-#indexBanner img {
-    height: 500px;
-    width: 1000px;
-    display: block;
-    margin: 0 auto;
-
-}
 
 .mainContent {
     margin-top: 30px;
@@ -162,7 +164,7 @@ a:visited {
 
 .childBox {
     padding: 10px;
-   
+
 
 }
 
