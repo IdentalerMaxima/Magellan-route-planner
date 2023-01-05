@@ -1,8 +1,8 @@
 package com.magellan.user;
 
 import com.magellan.LoginParameterBean;
-import com.magellan.MagellanResource;
 import com.magellan.RegisterParameterBean;
+import com.magellan.db.DBTablePrinter;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -10,36 +10,42 @@ import jakarta.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.swing.text.html.parser.Entity;
+import java.sql.*;
+
+
 @Path("user")
 public class UserController {
     @Inject
     private UsersService usersService;
 
     private static final Logger logger = LogManager.getLogger(UserController.class);
+
     @GET
     @Path("loginstatus/{username}")
-    public Response getUserLoginStatus(@PathParam("username") String username){
+    public Response getUserLoginStatus(@PathParam("username") String username) {
         User user = usersService.getUserFromDatabase(username);
-        if(user == null){
+        if (user == null) {
             return Response.ok("User not found!").build();
         }
-        if(usersService.isUserLoggedIn(user)){
-            return Response.ok("User logged in and user is admin: "+user.isAdmin()+"!").build();
-        }else{
+        if (usersService.isUserLoggedIn(user)) {
+            return Response.ok("User logged in and user is admin: " + user.isAdmin() + "!").build();
+        } else {
             return Response.ok("User not logged in!").build();
         }
     }
+
     @GET
     @Path("logout/{username}")
-    public Response userLogout(@PathParam("username") String username){
+    public Response userLogout(@PathParam("username") String username) {
         User user = usersService.getUserFromDatabase(username);
-        if(user==null){
+        if (user == null) {
             return Response.ok("user not found!").build();
         }
-        if(usersService.isUserLoggedIn(user)){
+        if (usersService.isUserLoggedIn(user)) {
             User.loggedInUsers.remove(usersService.getLoggedInUserInstanceIndexInArray(user));
             return Response.ok("User logged out!").build();
-        }else{
+        } else {
             return Response.ok("User was already logged out!").build();
         }
     }
@@ -47,19 +53,18 @@ public class UserController {
     @POST
     @Path("login")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response userLogin(final LoginParameterBean loginInfo){
+    public Response userLogin(final LoginParameterBean loginInfo) {
         logger.info("login called");
         User tempUser = usersService.getUserFromDatabase(loginInfo.username);
         String responseText;
 
-        if(tempUser==null){
+        if (tempUser == null) {
             return Response.ok("User not found!").build();
         }
 
-        if(!usersService.encryptPassword(loginInfo.password).equals(tempUser.getPassword())){
+        if (!usersService.encryptPassword(loginInfo.password).equals(tempUser.getPassword())) {
             responseText = "Incorrect password";
-        }
-        else {
+        } else {
             responseText = usersService.logUserIn(tempUser) ? "Login successful!" : "User already logged in!";
         }
         return Response.ok(responseText).build();
@@ -68,9 +73,9 @@ public class UserController {
     @POST
     @Path("register")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registerUser(final RegisterParameterBean userInfo){
+    public Response registerUser(final RegisterParameterBean userInfo) {
         User tempUser = usersService.getUserFromDatabase(userInfo.username);
-        if(tempUser!=null){
+        if (tempUser != null) {
             return Response.ok("username is taken!").build();
         }
 
@@ -80,3 +85,5 @@ public class UserController {
         return Response.ok("Successful registration!").build();
     }
 }
+
+
