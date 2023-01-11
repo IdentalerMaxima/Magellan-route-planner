@@ -5,14 +5,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    </link>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="exp/script.js"></script>
+    <title>Magellan route planner</title>
 </head>
 
-<body>
-    <a href="https://youtu.be/dQw4w9WgXcQ">
-        <h1>Kattints rám!</h1>
-    </a>
+<body style="margin-top: 100px;">
+    <div class="navbar">
+        <h1>Magellán Útvonaltervező</h1>
+        <div class="navleft">
+            <img src="exp/logo.jpg">
 
+        </div>
+
+        <div class="dropdown">
+
+            <button class="dropbtn">
+                <img src="exp/munoicon.png">
+
+            </button>
+            <div class="dropdown-content">
+                <a href="index.html">Főoldal</a>
+                <a href="login1.html">Bejelentkezés/kijelentkezés</a>
+                <a href="login1.html">Fiók létrehozása</a>
+                <a href="#">Útvonalterv</a>
+                <a onclick="openStuff();">Ajánló</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="apiClass1">
+        <div .class="wrapper">
+            
+        </div>
+
+    </div>
+
+    <footer class="footer-distributed">
+
+        <div class="footer-right">
+
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-reddit"></i></a>
+
+        </div>
+
+        <div class="footer-left">
+
+            <p class="footer-links">
+                <a class="link-1" href="#">Főoldal</a>
+
+                <a href="#">Rólunk</a>
+
+                <a href="#">Gyik</a>
+
+                <a href="#">Kapcsolat</a>
+
+                <a href="#">Élménybeszámolók</a>
+
+                <a href="#">Túrák</a>
+            </p>
+
+            <p>Magellán Útvonaltervező &copy; 2023</p>
+        </div>
+
+    </footer>
 </body>
 
 </html>
