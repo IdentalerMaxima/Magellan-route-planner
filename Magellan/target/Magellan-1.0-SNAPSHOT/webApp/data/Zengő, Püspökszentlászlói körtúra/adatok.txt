@@ -1,0 +1,3 @@
+A túra hossza: 7,2 km
+A túra időtartama: 2,5 óra
+Szintkülönbség: 360 méter fel, ugyanannyi le
