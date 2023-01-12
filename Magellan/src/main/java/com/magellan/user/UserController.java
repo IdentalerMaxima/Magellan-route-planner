@@ -1,17 +1,13 @@
 package com.magellan.user;
 
-import com.magellan.LoginParameterBean;
-import com.magellan.RegisterParameterBean;
-import com.magellan.db.DBTablePrinter;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.swing.text.html.parser.Entity;
-import java.sql.*;
 
 
 @Path("user")
@@ -24,6 +20,7 @@ public class UserController {
     @GET
     @Path("loginstatus/{username}")
     public Response getUserLoginStatus(@PathParam("username") String username) {
+        logger.info("getUserLoginStaus meghívása.");
         User user = usersService.getUserFromDatabase(username);
         if (user == null) {
             return Response.ok("User not found!").build();
@@ -38,6 +35,7 @@ public class UserController {
     @GET
     @Path("logout/{username}")
     public Response userLogout(@PathParam("username") String username) {
+        logger.info("userLogout meghívása.");
         User user = usersService.getUserFromDatabase(username);
         if (user == null) {
             return Response.ok("user not found!").build();
@@ -54,7 +52,7 @@ public class UserController {
     @Path("login")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response userLogin(final LoginParameterBean loginInfo) {
-        logger.info("login called");
+        logger.info("userLogin meghívása.");
         User tempUser = usersService.getUserFromDatabase(loginInfo.username);
         String responseText;
 
@@ -74,6 +72,7 @@ public class UserController {
     @Path("register")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerUser(final RegisterParameterBean userInfo) {
+        logger.info("registerUser meghívása.");
         User tempUser = usersService.getUserFromDatabase(userInfo.username);
         if (tempUser != null) {
             return Response.ok("username is taken!").build();
